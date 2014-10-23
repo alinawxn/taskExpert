@@ -2,15 +2,19 @@
 //  ChecklistItem.h
 //  Checklists
 //  检查点 model
-//  Created by Matthijs on 30-09-13.
-//  Copyright (c) 2013 Happy Bubsy. All rights reserved.
-//
+
 
 #import <Foundation/Foundation.h>
 
 @interface ChecklistItem : NSObject <NSCoding>
 
+
+
 @property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) NSString *checkPointDate;
+@property (nonatomic, copy) NSString *checkPointHour;
+@property (nonatomic, copy) NSString *checkPointMinute;
+@property (nonatomic, copy) NSDate *checkPoint;
 @property (nonatomic, assign) BOOL checked;
 
 

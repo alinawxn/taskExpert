@@ -2,9 +2,7 @@
 //  Checklist.h
 //  Checklists
 //  任务 model
-//  Created by Matthijs on 12-24-13.
-//  Copyright (c) 2013 Happy Bubsy. All rights reserved.
-//
+
 
 #import <Foundation/Foundation.h>
 
@@ -22,11 +20,13 @@
 @property (nonatomic, copy) NSString *taskDescription;
 //检查点列表
 @property(nonatomic,strong) NSMutableArray *items;
+@property(nonatomic, copy) NSDate *deadLine;
+@property(nonatomic, copy) NSDate * closestCheckPoint;
 
 @property(nonatomic,copy)NSString *iconName;
 
 
-
+-(void)sortChecklistItems;
 -(int)countUncheckedItems;
 
 @end

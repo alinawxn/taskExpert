@@ -1,10 +1,7 @@
 //
 //  Checklist.m
 //  Checklists
-//
-//  Created by Matthijs on 12-24-13.
-//  Copyright (c) 2013 Happy Bubsy. All rights reserved.
-//
+
 
 #import "Checklist.h"
 #import "ChecklistItem.h"
@@ -47,6 +44,8 @@
         self.taskDescription = [aDecoder decodeObjectForKey:@"TaskDescription"];
         self.items = [aDecoder decodeObjectForKey:@"Items"];
         self.iconName = [aDecoder decodeObjectForKey:@"IconName"];
+        self.deadLine = [aDecoder decodeObjectForKey:@"DeadLine"];
+        self.closestCheckPoint = [aDecoder decodeObjectForKey:@"ClosestCheckPoint"];
     }
     return self;
     
@@ -57,18 +56,27 @@
     
     [aCoder encodeObject:self.name forKey:@"Name"];
     [aCoder encodeObject:self.deadLineDate forKey:@"DeadLineDate"];
-    [aCoder encodeObject:self.deadLineHour forKey:@"DeadLineMinute"];
+    [aCoder encodeObject:self.deadLineHour forKey:@"DeadLineHour"];
     [aCoder encodeObject:self.deadLineMinute forKey:@"DeadLineMinute"];
     [aCoder encodeObject:self.taskTaker forKey:@"TaskTaker"];
     [aCoder encodeObject:self.taskDescription forKey:@"TaskDescription"];
     [aCoder encodeObject:self.items forKey:@"Items"];
     [aCoder encodeObject:self.iconName forKey:@"IconName"];
+    [aCoder encodeObject:self.deadLine forKey:@"DeadLine"];
+    [aCoder encodeObject:self.closestCheckPoint forKey:@"ClosestCheckPoint"];
 }
 
 
 -(NSComparisonResult)compare:(Checklist*)otherChecklist{
-    
-    return [self.name localizedStandardCompare:otherChecklist.name];
+    return [self.closestCheckPoint compare:otherChecklist.closestCheckPoint];
 }
+
+-(void)sortChecklistItems{
+    
+    [self.items sortUsingSelector:@selector(compare:)];
+    
+}
+
+
 
 @end

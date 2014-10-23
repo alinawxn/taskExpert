@@ -9,22 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Checklists/ItemDetailViewController.m"
-            timestampString = "434145838.723392"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "-done"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Checklists/TaskDetailViewController.h"
             timestampString = "434736865.52561"
             startingColumnNumber = "9223372036854775807"
@@ -39,7 +23,7 @@
                   symbolName = "-[TaskDetailViewController delegate]"
                   moduleName = "Checklists"
                   urlString = "file:///Users/xiaonanwang/Desktop/work/Checklists%20copy/Checklists/TaskDetailViewController.h"
-                  timestampString = "434738381.794977"
+                  timestampString = "435697146.251056"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "23"
@@ -53,7 +37,7 @@
                   symbolName = "-[TaskDetailViewController setDelegate:]"
                   moduleName = "Checklists"
                   urlString = "file:///Users/xiaonanwang/Desktop/work/Checklists%20copy/Checklists/TaskDetailViewController.h"
-                  timestampString = "434738381.795181"
+                  timestampString = "435697146.251436"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "23"
@@ -70,11 +54,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Checklists/ChecklistViewController.m"
-            timestampString = "434738381.753406"
+            timestampString = "435780927.64055"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>

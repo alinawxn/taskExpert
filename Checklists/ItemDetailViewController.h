@@ -2,11 +2,11 @@
 //  AddItemViewController.h
 //  Checklists
 //  添加检查点/编辑检查点 view controller
-//  Created by Matthijs on 30-09-13.
-//  Copyright (c) 2013 Happy Bubsy. All rights reserved.
-//
+
 
 #import <UIKit/UIKit.h>
+#import "Checklist.h"
+#import "CKCalendarView.h"
 
 @class ItemDetailViewController;
 @class ChecklistItem;
@@ -23,14 +23,24 @@
 
 @interface ItemDetailViewController : UITableViewController <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *textField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
-
 @property (nonatomic, weak) id <ItemDetailViewControllerDelegate> delegate;
 @property (nonatomic, strong) ChecklistItem *itemToEdit;
+@property (nonatomic, strong) Checklist *taskToEdit;
+
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UITextField *checkPointDate;
+@property (weak, nonatomic) IBOutlet UITextField *hour;
+@property (weak, nonatomic) IBOutlet UITextField *minute;
+@property (weak, nonatomic) IBOutlet UIButton *calendarButton;
+
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
+
 
 - (IBAction)cancel;
 - (IBAction)done;
-@property (weak, nonatomic) IBOutlet UIDatePicker *dataPicker;
+- (IBAction)setDate:(id)sender;
+- (IBAction)HourEndEditing:(id)sender;
+- (IBAction)MinuteEndEditing:(id)sender;
 
 @end

@@ -1,10 +1,6 @@
 //
 //  DataModel.m
 //  Checklists
-//
-//  Created by happybubsy on 12/24/13.
-//  Copyright (c) 2013 Happy Bubsy. All rights reserved.
-//
 
 #import "DataModel.h"
 
@@ -31,15 +27,17 @@
     
     if(firstTime){
         
-        Checklist *checklist = [[Checklist alloc]init];
-        
-        checklist.name = @"List";
-        
-        [self.lists addObject:checklist];
-        
-        [self setIndexOfSelectedChecklist:0];
-        
-        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"FirstTime"];
+//        Checklist *checklist = [[Checklist alloc]init];
+//        
+//        checklist.name = @"第一个任务";
+//        checklist.taskTaker = @"本人";
+//
+//        
+//        [self.lists addObject:checklist];
+//        
+//        [self setIndexOfSelectedChecklist:0];
+//        
+//        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"FirstTime"];
         
         
     }

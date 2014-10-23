@@ -12,7 +12,9 @@
 
 @property(nonatomic, strong) CKCalendarView *calendar;
 @property(nonatomic, strong) NSDateFormatter *dateFormatter;
+@property(nonatomic, strong) NSDate *selectedDate;
 @property(nonatomic, strong) NSDate *minimumDate;
+@property(nonatomic) BOOL dateFlag, hourFlag, minuteFlag;
 @property(nonatomic) BOOL calendarFlag;//calendar是否显示的flag
 
 @end
@@ -26,6 +28,9 @@
         self.title = @"编辑任务";
         
         //checklist数据放入各个文本框
+        self.dateFlag = true;
+        self.minuteFlag = true;
+        self.hourFlag = true;
         self.taskName.text = self.checklistToEdit.name;
         self.taskTaker.text = self.checklistToEdit.taskTaker;
         self.dateField.text = self.checklistToEdit.deadLineDate;
@@ -108,6 +113,9 @@
 - (void)calendar:(CKCalendarView *)calendar didSelectDate:(NSDate *)date {
     self.dateField.text = [self.dateFormatter stringFromDate:date];
     [self.calendar setHidden:YES];
+    self.calendarFlag = NO;
+    self.selectedDate = date;
+    [self DateEndEditing];
 }
 //----------------------------------------------------
 
@@ -140,29 +148,111 @@
 
 //done时，checklist获取数据
 - (IBAction)done{
-    if (self.checklistToEdit == nil) {
-        
-        Checklist *checklist = [[Checklist alloc] init];
-        checklist.name = self.taskName.text;
-        checklist.taskTaker = self.taskTaker.text;
-        checklist.taskDescription = self.taskDescription.text;
-        checklist.deadLineDate = self.dateField.text;
-        checklist.deadLineHour = self.hour.text;
-        checklist.deadLineMinute = self.minute.text;
-        
-        [self.delegate TaskDetailViewController:self didFinishAddingChecklist:checklist];
-        
-    } else {
-        self.checklistToEdit.name = self.taskName.text;
-        self.checklistToEdit.taskTaker = self.taskTaker.text;
-        self.checklistToEdit.taskDescription = self.taskDescription.text;
-        self.checklistToEdit.deadLineDate = self.dateField.text;
-        self.checklistToEdit.deadLineHour = self.hour.text;
-        self.checklistToEdit.deadLineMinute = self.minute.text;
-        [self.delegate TaskDetailViewController:self didFinishEditingChecklist:self.checklistToEdit];
+    
+    
+    //判断是否有格子未填
+    if([self.taskName.text  isEqual: @""] || [self.taskTaker.text  isEqual: @""] || [self.dateField.text  isEqual: @""] || [self.hour.text  isEqual: @""] || [self.minute.text  isEqual: @""] || [self.taskDescription.text  isEqual: @""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"请填写全部信息" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+        [alert show];
+    }else if(!self.dateFlag || !self.hourFlag || !self.minuteFlag){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"请填写正确信息" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+        [alert show];
+    }else{
+        if (self.checklistToEdit == nil) {
+            
+            Checklist *checklist = [[Checklist alloc] init];
+            checklist.name = self.taskName.text;
+            checklist.taskTaker = self.taskTaker.text;
+            checklist.taskDescription = self.taskDescription.text;
+            checklist.deadLineDate = self.dateField.text;
+            checklist.deadLineHour = self.hour.text;
+            checklist.deadLineMinute = self.minute.text;
+            checklist.deadLine = [self date:self.selectedDate hourString:self.hour.text minuteString:self.minute.text];
+            checklist.closestCheckPoint = checklist.deadLine;
+            [self.delegate TaskDetailViewController:self didFinishAddingChecklist:checklist];
+            
+        } else {
+            self.checklistToEdit.name = self.taskName.text;
+            self.checklistToEdit.taskTaker = self.taskTaker.text;
+            self.checklistToEdit.taskDescription = self.taskDescription.text;
+            self.checklistToEdit.deadLineDate = self.dateField.text;
+            self.checklistToEdit.deadLineHour = self.hour.text;
+            self.checklistToEdit.deadLineMinute = self.minute.text;
+            self.dateFormatter = [[NSDateFormatter alloc] init];
+            [self.dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            NSDate *dateT = [self.dateFormatter dateFromString:self.dateField.text];
+            self.checklistToEdit.deadLine = [self date:dateT hourString:self.hour.text minuteString:self.minute.text];
+            NSIndexPath *iP = [NSIndexPath indexPathForRow:0 inSection:0];
+            ChecklistItem *oclItem = self.checklistToEdit.items[iP.row];
+            self.checklistToEdit.closestCheckPoint = oclItem.checkPoint;
+            
+            [self.delegate TaskDetailViewController:self didFinishEditingChecklist:self.checklistToEdit];
+        }
     }
 }
 
+#pragma mark - didEndEditingTests
+//Date
+- (IBAction)DateEndEditing{
+    NSDate *todayDate = [NSDate date];
+    
+    //today比选定时间晚
+    if ([todayDate compare:self.selectedDate] == NSOrderedDescending) {
+        self.dateField.layer.borderWidth = 1;
+        self.dateField.layer.borderColor = [[UIColor redColor] CGColor];
+        self.dateFlag = NO;
+    }else{//today比选定时间早
+        self.dateField.layer.borderWidth = 0;
+        self.dateFlag = YES;
+    }
+}
 
+- (IBAction)HourEndEditing:(id)sender {
+    int hourInt = [self.hour.text intValue];
+    if (![self.hour.text isEqual:@"0"]&&![self.hour.text isEqual: @"00"]&&hourInt == 0) {
+        hourInt = 1000;
+    }
+    if (hourInt<0 || hourInt >= 24) {
+        self.hour.layer.borderColor = [[UIColor redColor] CGColor];
+        self.hour.layer.borderWidth = 1;
+        self.hourFlag = NO;
+        //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"请填写合理时间（00~24）" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+        //[alert show];
+    }else{
+        self.hour.layer.borderWidth = 0;
+        self.hourFlag = YES;
+    }
+}
+
+- (IBAction)MinuteEndEditing:(id)sender {
+    int minuteInt = [self.minute.text intValue];
+    if ((![self.minute.text isEqual:@"0"]||![self.minute.text isEqual: @"00"])&&minuteInt == 0) {
+        minuteInt = 1000;
+    }
+    if (minuteInt<0 || minuteInt >= 59) {
+        self.minute.layer.borderColor = [[UIColor redColor] CGColor];
+        self.minute.layer.borderWidth = 1;
+        self.minuteFlag = NO;
+    }else{
+        self.minute.layer.borderWidth = 0;
+        self.minuteFlag = YES;
+    }
+}
+
+#pragma mark - other functions
+-(NSDate *)date:(NSDate *)date hourString:(NSString *)hour minuteString:(NSString *)minute{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSDateComponents* comps = [[NSDateComponents alloc]init];
+    comps.year = components.year;
+    comps.month = components.month;
+    comps.day = components.day;
+    comps.hour = [hour integerValue];
+    comps.minute = [minute integerValue];
+    
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDate *fullVersionDate = [calendar dateFromComponents:comps];
+    return fullVersionDate;
+}
 
 @end
