@@ -25,6 +25,7 @@
 		7B6CA40017F9D7C900E68B4B /* ItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CA3FF17F9D7C900E68B4B /* ItemDetailViewController.m */; };
 		7B6CA4C617FC1F7900E68B4B /* AllListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CA4C517FC1F7900E68B4B /* AllListsViewController.m */; };
 		7B6CA4C917FC301B00E68B4B /* Checklist.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CA4C817FC301B00E68B4B /* Checklist.m */; };
+		8B21BCE219FD975700E5B023 /* ContactsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B21BCE119FD975700E5B023 /* ContactsListTableViewController.m */; };
 		8B33088D19DE3416005FECD7 /* TaskDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B33088C19DE3416005FECD7 /* TaskDetailViewController.m */; };
 		8B40C09B19DF415F00ADB2B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B40C09A19DF415F00ADB2B4 /* Main.storyboard */; };
 		8B4FE53719E34FC300A714EA /* CalendarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B4FE53619E34FC300A714EA /* CalendarIcon.png */; };
@@ -74,6 +75,8 @@
 		7B6CA4C517FC1F7900E68B4B /* AllListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllListsViewController.m; sourceTree = "<group>"; };
 		7B6CA4C717FC301B00E68B4B /* Checklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checklist.h; sourceTree = "<group>"; };
 		7B6CA4C817FC301B00E68B4B /* Checklist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Checklist.m; sourceTree = "<group>"; };
+		8B21BCE019FD975700E5B023 /* ContactsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsListTableViewController.h; sourceTree = "<group>"; };
+		8B21BCE119FD975700E5B023 /* ContactsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsListTableViewController.m; sourceTree = "<group>"; };
 		8B33088B19DE3416005FECD7 /* TaskDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDetailViewController.h; sourceTree = "<group>"; };
 		8B33088C19DE3416005FECD7 /* TaskDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDetailViewController.m; sourceTree = "<group>"; };
 		8B40C09A19DF415F00ADB2B4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -143,8 +146,11 @@
 		7B6CA3CC17F967DD00E68B4B /* Checklists */ = {
 			isa = PBXGroup;
 			children = (
+				7B6CA3D517F967DD00E68B4B /* ChecklistsAppDelegate.h */,
+				7B6CA3D617F967DD00E68B4B /* ChecklistsAppDelegate.m */,
+				8B21BCDE19FD897000E5B023 /* TabBarOneViewControllers */,
+				8B21BCDF19FD96F300E5B023 /* TabBarTwoViewControllers */,
 				8B4FE53919E3507300A714EA /* Models */,
-				8B4FE53819E3505E00A714EA /* ViewControllers */,
 				8B4FE53319E34F5000A714EA /* Resources */,
 				8B40C09A19DF415F00ADB2B4 /* Main.storyboard */,
 				7B6CA3DE17F967DD00E68B4B /* Images.xcassets */,
@@ -182,6 +188,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8B21BCDE19FD897000E5B023 /* TabBarOneViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7B6CA4C417FC1F7900E68B4B /* AllListsViewController.h */,
+				7B6CA4C517FC1F7900E68B4B /* AllListsViewController.m */,
+				8B33088B19DE3416005FECD7 /* TaskDetailViewController.h */,
+				8B33088C19DE3416005FECD7 /* TaskDetailViewController.m */,
+				7B6CA3DB17F967DD00E68B4B /* ChecklistViewController.h */,
+				7B6CA3DC17F967DD00E68B4B /* ChecklistViewController.m */,
+				7B6CA3FE17F9D7C900E68B4B /* ItemDetailViewController.h */,
+				7B6CA3FF17F9D7C900E68B4B /* ItemDetailViewController.m */,
+			);
+			name = TabBarOneViewControllers;
+			sourceTree = "<group>";
+		};
+		8B21BCDF19FD96F300E5B023 /* TabBarTwoViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8B21BCE019FD975700E5B023 /* ContactsListTableViewController.h */,
+				8B21BCE119FD975700E5B023 /* ContactsListTableViewController.m */,
+			);
+			name = TabBarTwoViewControllers;
+			sourceTree = "<group>";
+		};
 		8B4FE53319E34F5000A714EA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,23 +222,6 @@
 				8B4FE53619E34FC300A714EA /* CalendarIcon.png */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		8B4FE53819E3505E00A714EA /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				7B6CA3D517F967DD00E68B4B /* ChecklistsAppDelegate.h */,
-				7B6CA3D617F967DD00E68B4B /* ChecklistsAppDelegate.m */,
-				7B6CA4C417FC1F7900E68B4B /* AllListsViewController.h */,
-				7B6CA4C517FC1F7900E68B4B /* AllListsViewController.m */,
-				8B33088B19DE3416005FECD7 /* TaskDetailViewController.h */,
-				8B33088C19DE3416005FECD7 /* TaskDetailViewController.m */,
-				7B6CA3DB17F967DD00E68B4B /* ChecklistViewController.h */,
-				7B6CA3DC17F967DD00E68B4B /* ChecklistViewController.m */,
-				7B6CA3FE17F9D7C900E68B4B /* ItemDetailViewController.h */,
-				7B6CA3FF17F9D7C900E68B4B /* ItemDetailViewController.m */,
-			);
-			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		8B4FE53919E3507300A714EA /* Models */ = {
@@ -340,6 +353,7 @@
 				7B6CA3DD17F967DD00E68B4B /* ChecklistViewController.m in Sources */,
 				7B6CA40017F9D7C900E68B4B /* ItemDetailViewController.m in Sources */,
 				7B6CA3FD17F99B6400E68B4B /* ChecklistItem.m in Sources */,
+				8B21BCE219FD975700E5B023 /* ContactsListTableViewController.m in Sources */,
 				8B33088D19DE3416005FECD7 /* TaskDetailViewController.m in Sources */,
 				7B6CA4C917FC301B00E68B4B /* Checklist.m in Sources */,
 			);

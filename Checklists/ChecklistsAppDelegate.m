@@ -23,7 +23,9 @@
 {
     _dataModel = [[DataModel alloc]init];
     
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+    
+    UINavigationController *navigationController = (UINavigationController *)tabBarController.viewControllers[0];
     
     AllListsViewController *controller = navigationController.viewControllers[0];
     
